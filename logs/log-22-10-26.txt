@@ -1,0 +1,8 @@
+[22-10-26 01:34:39][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:46:09][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:47:30][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:47:30][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:47:51][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:50:07][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:50:41][INFO] PresentacionesController: listaron las presentaciones
+[22-10-26 01:50:47][INFO] PresentacionesController: listaron las presentaciones
