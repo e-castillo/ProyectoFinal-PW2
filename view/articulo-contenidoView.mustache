@@ -1,0 +1,22 @@
+{{> header}}
+<section class="my-4">
+    <div class="d-flex">
+        {{#articulos}}
+            <div class="d-flex flex-column gap-3 mb-2">
+                <h1 class="">{{titulo}}</h1>
+                <h3 class="">{{subtitulo}}</h3>
+                <div class="d-flex flex-wrap col col-12">
+                    <div class="col col-8">
+                        <img src="/infonet/public/imgArticulos/{{ imagen }}"
+                             alt="{{imagen}}" style="width: inherit">
+                    </div>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.3643336747523!2d-58.564993885320824!3d-34.67075316855397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc62cc3ef7083%3A0x8867107f425fade5!2sUniversidad%20Nacional%20de%20La%20Matanza!5e0!3m2!1ses!2sar!4v1669127499735!5m2!1ses!2sar"
+                        width="col-6" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <p class="">{{texto}}</p>
+                <p>Escrito por {{autor}}</p>
+            </div>
+        {{/articulos}}
+    </div>
+{{> footer}}

@@ -1,0 +1,53 @@
+{{> header}}
+<!--<nav class="topnav" onload="cargaFechas()">-->
+<section>
+<h3 class="my-3">Compras diarias por Rango de Fechas</h3>
+    <form id="formDate" action="/infonet/graficos" method="get" class="my-3">
+        <div class="d-flex gap-3 align-items-center">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="filtroFechaD" name="desde" value={{fechaDesde}}>
+                <label for="desde">Desde</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" id="hasta" name="hasta" value={{fechaHasta}}>
+                <label for="hasta">Hasta</label>
+            </div>
+            <div>
+                <button type="submit" form="formDate" class="btn btn-danger btn-radius">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <canvas id="myChart" class="my-3 p-5"></canvas>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{{#datesC}}'{{fecha}}',{{/datesC}}],
+            datasets: [{
+                label: 'Cantidad de compras ',
+                data: [{{#cantidadesC}}{{cantidad}},{{/cantidadesC}}],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{{> footer}}
+<!--<script>-->
+<!--    function cargaFechas(){-->
+<!--        document.getElementById('datePicker').value = new Date().toDateInputValue();-->
+<!--    }-->
+<!--</script>-->

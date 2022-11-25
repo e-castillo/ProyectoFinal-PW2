@@ -1,0 +1,25 @@
+@import url("./global.css");
+
+/*HOME*/
+.home-product {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  /*HOME*/
+  .home-product {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  /*HOME*/
+  .home-product {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+

@@ -1,0 +1,88 @@
+{{> header}}
+<main>
+    {{> menuAbm}}
+    <section class="my-3">
+        <h4 class="my-3">Todos los productos</h4>
+        <table class="table text-center">
+            <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Accion</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#productos}}
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>
+                        <div>
+                            <img src="/infonet/public/iso/{{ imagen }}"
+                                 alt="{{ imagen }}"
+                                 class="m-auto"
+                                 width="30"/>
+                        </div>
+                    </td>
+                    <td>{{descripcion}}</td>
+                    <td>
+                        <div class="d-flex justify-content-center flex-wrap gap-2">
+                            <button class="btn btn-success btn-radius" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#modalProducto{{ id_producto }}">Modificar
+                            </button>
+                            <!--para borrar se pone el nombre del controller : producto
+                            y el nombre del metodo: borrarProducto
+                            el parametro es el /id= que sera el $_GET["id"]-->
+                            <a class="btn btn-danger btn-radius"
+                               href="/infonet/producto/borrarProducto/id={{ id_producto }}">Borrar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {{/productos}}
+            </tbody>
+        </table>
+    </section>
+
+
+    <!-- Modal Modificar Producto-->
+    {{#productos}}
+        <div class="modal fade" id="modalProducto{{ id_producto }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar producto</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="/infonet/producto/modificarProducto/idProducto={{id_producto}}"
+                    enctype="multipart/form-data" >
+                    <div class="modal-body">
+                        <label for="modNombreProducto">Nombre del producto</label>
+                        <input class="form-control" type="text" name="modNombreProducto" id="modNombreProducto"
+                               value="{{nombre}}">
+                        <br/>
+                        <input type="text" class="d-none" value="{{imagen}}" name="modImagenProductoSave" id="modImagenProductoSave">
+                        <label for="modImagenProducto">Imagen de producto</label>
+                        <input class="form-control" type="file" name="modImagenProducto" id="modImagenProducto"
+                               accept="image/png, image/jpeg">
+                        <br/>
+                        <span>Seleccionar tipo <span class="text-danger">(obligatorio)</span></span>
+                        <select class="form-select" name="modTipoProducto" aria-label="Default select example">
+                            <option selected disabled>Tipo de producto</option>
+                            <option value="1">Diario</option>
+                            <option value="2">Revista</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-radius" data-bs-dismiss="modal">Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-radius">Guardar cambios</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/productos}}
+</main>
+{{> footer}}

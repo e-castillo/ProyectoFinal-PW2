@@ -1,0 +1,33 @@
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+
+
+    $(document).ready(function () {
+        console.log('hola mundo');
+
+        let value = $('#preferencia').val();
+        console.log(value);
+
+        const mp = new MercadoPago('TEST-23d1538d-a44c-4d8f-ada8-f0d41d638e0a', {
+            locale: 'es-AR'
+        });
+
+        mp.checkout({
+            preference: {
+                id: value,
+            },
+            autoOpen: true,
+        });
+    })
+</script>
+
+{{header}}
+
+
+{{#preferencias}}
+    <input type="text" value="{{id}}" id="preferencia" class="d-none" style="display: none">
+{{/preferencias}}
+
+
+{{footer}}

@@ -1,0 +1,41 @@
+{{> header}}
+<main>
+    {{> menuAbm}}
+    <section class="my-3">
+        <h5>Crear Productos</h5>
+        <div class="my-3">
+            <form method="post" action="/infonet/producto/subirProducto" enctype="multipart/form-data">
+                <div class="form-floating my-3">
+                    <input type="text" name="nombreProducto" class="form-control" id="nombreProducto"
+                           placeholder="name@example.com" required>
+                    <label for="nombreProducto">Nombre</label>
+                </div>
+                <div class="form-floating my-3">
+                    <p class="mb-0">Seleccionar imagen</p>
+                    <input type="file" name="imagenProducto" class="form-control" id="imagenProducto"
+                           accept="image/png, image/jpeg"
+                           style="padding: 0 12px !important; line-height: 3.25 !important;" required>
+                </div>
+                <!---En este div y el button son para eliminar y previsualizar-->
+                <div id="prevProd" class="form-floating my-3">
+                </div>
+                <button type="button" class="btn-close" id="clearImgProducto"></button>
+                <div class="form-floating my-3">
+                    <select class="form-select" name="tipoProducto" id="tipoProducto"
+                            aria-label="Floating label select example" required>
+                        <option selected disabled>Tipo</option>
+                        <option value="1">Diario</option>
+                        <option value="2">Revista</option>
+                    </select>
+                    <label for="tipoProducto">Seleccionar tipo</label>
+                </div>
+                <div class="form-floating my-3">
+                    <input type="number" step=".01" class="form-control" id="precioProducto" name="precioProducto" placeholder="0.00">
+                    <label for="nombreEdicion">Precio del producto</label>
+                </div>
+                <button type="submit" class="btn btn-primary my-2 btn-radius">Crear producto</button>
+            </form>
+        </div>
+    </section>
+</main>
+{{> footer}}

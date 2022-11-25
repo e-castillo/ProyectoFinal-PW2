@@ -1,0 +1,79 @@
+{{> header}}
+<section class="my-3">
+    <div class="d-flex justify-content-center">
+        {{#producto}}
+            <div class="d-flex flex-column gap-3 mb-2">
+                <p class="bg-info btn-radius px-2 fst-italic" style="width: fit-content">{{descripcion}}</p>
+                <h1 class="text-center">{{nombre}}</h1>
+                <p class="text-center">It is a long established fact that a reader will be distracted by the readable
+                    content of a page when looking
+                    at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+                    letters,
+                    as opposed to using 'Content here, content here', making it look like readable English. Many desktop
+                    publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+                    search
+                    for
+                    'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over
+                    the
+                    years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+
+
+                {{#suscripto}}
+                    <button class="btn btn-success btn-radius" disabled >Suscripto</button>
+                {{/suscripto}}
+                {{^suscripto}}
+                    <!-- TODO LLEVAR A CONFIRMAR COMPRA -->
+                    <a href="/infonet/pago/suscribirse/id_producto={{id_producto}}?id_usuario={{#usuario}}{{id_usuario}}{{/usuario}}" class="btn btn-danger btn-radius">Suscribirse ${{precio}}/mes</a>
+                {{/suscripto}}
+
+            </div>
+
+        {{/producto}}
+    </div>
+</section>
+<section class="my-3">
+    <h5 class="text-center my-3 text-decoration-underline">Ediciones del momento</h5>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+        {{#edicionProducto}}
+            {{^probando}}
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">{{fecha}}</h5>
+
+
+
+                                {{#comprado}}
+                                    <button class="btn btn-success btn-radius" disabled>Comprado</button>
+                                {{/comprado}}
+                                {{^comprado}}
+                                    <button class='btn btn-danger btn-radius' type='submit'>
+                                        <a class='nav-link' href='/infonet/pago/comprarEdicion/usuario={{#usuario}}{{id_usuario}}{{/usuario}}?edicion={{id_edicion}}'>Comprar</a>
+
+                                    </button>
+                                {{/comprado}}
+
+
+
+                        </div>
+                        <h6 class="card-subtitle mb-2 text-muted">Edición nro: {{id_edicion}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Valor: ${{precio}}</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+
+
+                        {{#comprado}}
+                            <a href="/infonet/seccion/seccionesPorEdicion/id={{id_edicion}}" class="card-link">Ver articulos</a>
+                        {{/comprado}}
+
+
+
+
+                    </div>
+                </div>
+            {{/probando}}
+        {{/edicionProducto}}
+    </div>
+</section>
+{{> footer}}

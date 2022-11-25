@@ -1,0 +1,153 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        //Edicion del producto
+        $(".containerSelectEdicion").hide();
+        $('.productoDeArticulo').change((e) => {
+            //console.log(e.target.value); //id =
+            var valueProducto = e.target.value;
+            $.ajax({
+                url: 'http://localhost/infonet/abm/edicionesPorProducto?id=' + valueProducto,
+                type: 'GET',
+                beforeSend: function (e) {
+                    // console.log('antes', e);
+                },
+                success: function (response) {
+                    let ediciones = JSON.parse(response)
+
+                    $(".containerSelectEdicion").html("" +
+                            "<select class='form-select productoEdicion' name='productoEdicion' id='productoEdicion' aria-label='Floating label select example' required>" +
+                            "<option selected disabled>Seleccionar edición</option> " +
+                            "</select> " +
+                            "<label for='productoEdicion'>Seleccionar edición</label>");
+
+                    $(".containerSelectEdicion").show();
+                    // $("#productoEdicion").append("<option selected disabled>Edición</option>");
+                    for (let edicion of ediciones) {
+                        $(".productoEdicion").append(`<option value="${edicion.id_edicion}">${edicion.evento}</option>`);
+                    }
+
+                    $('#productoEdicion').change((e)=>{
+                        console.log('edicion', e.target.value)
+                        $('#productoEdicionArticulo').val(e.target.value);
+                    })
+
+                    //seccion de la edicion
+                    // $("#containerSelectSeccion").hide();
+                    $('.productoEdicion').change((e) => {
+                        var valueSeccion = e.target.value;
+                        $.ajax({
+                            url: 'http://localhost/infonet/abm/seccionesPorEdicion?id=' + valueSeccion,
+                            type: 'GET',
+                            beforeSend: function (e) {
+                                // console.log('antes', e);
+                            },
+                            success: function (response) {
+                                let secciones = JSON.parse(response);
+                                // secciones.forEach(element=>{
+                                //     console.log(element.nombre);
+                                // })
+
+                                $(".containerSelectSeccion").html("" +
+                                        "<select class='form-select productoEdicionSeccion' name='productoEdicionSeccion' id='productoEdicionSeccion' aria-label='Floating label select example' required>" +
+                                        "<option selected disabled>Seleccionar sección</option> " +
+                                        "</select> " +
+                                        "<label for='productoEdicion'>Seleccionar sección</label>");
+
+                                // $("#containerSelectSeccion").show();
+
+                                // $("#productoEdicion").append("<option selected disabled>Edición</option>");
+                                secciones.forEach(element => {
+                                    $(".productoEdicionSeccion").append(`<option value="${element.id_seccion}">${element.nombre}</option>`);
+                                })
+
+                                $('#productoEdicionSeccion').change((e)=>{
+                                    console.log('seccion', e.target.value)
+                                    $('#productoEdicionSeccionArticulo').val(e.target.value);
+                                })
+                            }
+                        });
+                    });
+                }
+                // error: function (e) {
+                //     console.log('error', e);
+                // }
+            });
+        })
+    });
+</script>
+{{> header}}
+<main>
+    {{> menuAbm}}
+    <section class="my-3">
+        <div class="my-3">
+            <h4 class="my-4">Crear artículo</h4>
+            <div class="form-floating col-6">
+                <select class="form-select productoDeArticulo" id="productoDeArticulo"
+                        aria-label="Floating label select example">
+                    <option selected disabled>Producto</option>
+                    {{#productos}}
+                        <option value="{{id_producto}}">
+                            {{nombre}}
+                        </option>
+                    {{/productos}}
+                </select>
+                <label for="productoEdicion">Seleccionar producto</label>
+            </div>
+            <hr/>
+            <!---FORMULARIO-->
+            <form action="/infonet/articulo/subirArticulo" enctype="multipart/form-data" method="post">
+                <input type="text" class="d-none" id="productoEdicionSeccionArticulo" name="productoEdicionSeccionArticulo">
+                <input type="text" class="d-none" id="productoEdicionArticulo" name="productoEdicionArticulo">
+                <div class="d-flex col-md-12 my-3 gap-2">
+                    <div class="form-floating col-6 containerSelectEdicion" id="containerSelectEdicion">
+                        <!---select ediciones-->
+                        <!--                        name = productoEdicion-->
+                        <label for="productoEdicion">Seleccionar edición</label>
+                    </div>
+                    <div class="form-floating col-6 containerSelectSeccion" id="containerSelectSeccion">
+                        <!--select secciones--->
+                        <!--                        name = productoEdicionSeccion-->
+                    </div>
+                </div>
+                <div class="form-floating my-3">
+                    <input type="text" class="form-control" name="tituloArticulo" id="tituloArticulo"
+                           placeholder="name@example.com" required>
+                    <label for="tituloArticulo">Título de la publicación</label>
+                </div>
+                <div class="form-floating my-3">
+                    <input type="text" class="form-control" name="subtituloArticulo" id="subtituloArticulo"
+                           placeholder="name@example.com" required>
+                    <label for="subtituloArticulo">Subtítulo de la publicación</label>
+                </div>
+                <div class="form-floating my-3">
+                    <p class="mb-0">Seleccionar imagen de portada de la publicación</p>
+                    <input type="file" name="imagenArticulo" class="form-control" id="imagenArticulo"
+                           accept="image/png, image/jpeg"
+                           style="padding: 0 12px !important; line-height: 3.25 !important;">
+                    <!--                    el jquery esta en app.js-->
+                </div>
+                <!---En este div y el button son para eliminar y previsualizar-->
+                <div id="prevArt" class="form-floating my-3">
+                </div>
+                <button type="button" class="btn-close" id="clearImgArticulo"></button>
+                <div class="form-floating my-3">
+                                                <textarea class="form-control" name="textoArticulo"
+                                                          placeholder="Leave a comment here"
+                                                          id="floatingTextarea2"
+                                                          style="height: 100px" required></textarea>
+                    <label for="textoArticulo">Texto del articulo</label>
+                </div>
+                <div class="d-flex col-md-12 my-3 gap-2">
+                    <div class="form-floating col-6">
+                        <input type="text" class="form-control" id="autorArticulo" name="autorArticulo"
+                               placeholder="name@example.com" required>
+                        <label for="autorArticulo">Autor</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary my-2 btn-radius">Crear artículo</button>
+            </form>
+        </div>
+    </section>
+</main>
+{{> footer}}

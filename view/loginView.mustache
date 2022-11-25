@@ -1,0 +1,44 @@
+{{> header}}
+
+<section>
+    <div class="container col-6 my-5">
+    <form method="post" action="/infonet/login/validarSesion">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="usuario">
+            <label for="floatingInput">Usuario</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" name="password">
+            <label for="floatingPassword">Contraseña</label>
+        </div>
+
+        <div>
+            {{#confirmed}}
+                <p>Usuario o clave incorrectas!</p>
+            {{/confirmed}}
+            {{#validador}}
+                <p>Ingrese un usuario o contraseña correcto</p>
+            {{/validador}}
+            {{#activado}}
+                <p>Su cuenta ha sido activada con exito! Ingrese su usuario y contraseña</p>
+            {{/activado}}
+            {{#desactivado}}
+                <p>Su cuenta no ha sido activada aun</p>
+            {{/desactivado}}
+        </div>
+
+        <!-- Submit button -->
+        <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-radius my-4">Iniciar sesion</button>
+        </div>
+
+        <!-- Register buttons -->
+    </form>
+        <div class="text-center">
+            <p>¿No estas registrado? <a class="btn btn-success btn-radius" href="/infonet/registro">Registrate</a></p>
+
+        </div>
+    </div>
+</section>
+
+{{> footer}}

@@ -1,0 +1,73 @@
+{{> header}}
+<!--<nav class="topnav" onload="cargaFechas()">-->
+<section>
+<h3 class="my-3">Suscripciones diarias por Rango de Fechas</h3>
+    <form id="formDate" action="/infonet/graficos" method="get" class="my-3">
+        <div class="d-flex gap-3 align-items-center">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="filtroFechaD" name="desde" value={{fechaDesde}}>
+                <label for="desde">Desde</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" id="hasta" name="hasta" value={{fechaHasta}}>
+                <label for="hasta">Hasta</label>
+            </div>
+            <div>
+                <button type="submit" form="formDate" class="btn btn-danger btn-radius">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <canvas id="myChart" class="my-3 p-5"></canvas>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{{#dates}}'{{fecha}}',{{/dates}}],
+    datasets: [{
+        label: 'Cantidad de suscripciones',
+        data: [{{#cantidades}}{{cantidad}},{{/cantidades}}],
+        borderWidth: 1
+    }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+</script>
+
+<!--<script>-->
+<!--    const ctx = document.getElementById('myChart');-->
+
+<!--    new Chart(ctx, {-->
+<!--        type: 'bar',-->
+<!--        data: {-->
+<!--            labels: ['11-10-20', '11-10-21', '11-10-22', '11-10-23', '11-10-24', '11-10-25'],-->
+<!--            datasets: [{-->
+<!--                label: '# of Votes',-->
+<!--                data: [12, 19, 3, 5, 2, 3],-->
+<!--                borderWidth: 1-->
+<!--            }]-->
+<!--        },-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                y: {-->
+<!--                    beginAtZero: true-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+{{> footer}}
+
+

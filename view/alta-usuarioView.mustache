@@ -1,0 +1,45 @@
+{{> header}}
+<div class="container">
+    <h2>Registro</h2>
+    <form method="post" action="/infonet/usuario/darAltaUsuario">
+
+        <div class="form-group mt-2">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" class="form-control" name="nombre" id="nombre">
+        </div>
+        <div class="form-group mt-2">
+            <label for="usuario">Usuario</label>
+            <input type="text" class="form-control" name="usuario" id="usuario">
+        </div>
+        <div class="form-group mt-2">
+            <label for="clave">Contraseña</label>
+            <input type="password" class="form-control" name="clave" id="clave">
+        </div>
+        <div class="form-group mt-2">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" id="email">
+        </div>
+        <div class="form-group mt-2">
+        <label for="rol">Rol</label>
+        <select class="form-select" id="rol" name="rol">
+            <option value=""> -Seleccione Rol- </option>
+            {{#roles}}
+                <option value="{{id_rol}}" name={{id_rol}}" >{{descripcion}}</option>
+            {{/roles}}
+        </select>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-block my-4">Registrarse</button>
+        </div>
+
+    </form>
+    {{#validador}}
+        <p>Por favor, complete bien el formulario.</p>
+    {{/validador}}
+    {{#title}}
+        {{title}}
+    {{/title}}
+</div>
+
+
+{{> footer}}

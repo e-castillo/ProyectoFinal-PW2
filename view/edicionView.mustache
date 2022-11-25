@@ -1,0 +1,25 @@
+{{> header}}
+<section class="my-3">
+    <div class="d-flex flex-column gap-2">
+        {{#ediciones}}
+            <div class="card">
+                <div class="card-header">
+                    Fecha: {{fecha}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{nombre}}</h5>
+                    <p class="card-text">Lo mejor de la fecha -  {{nombre}}</p>
+                    {{#comprado}}
+                        <button class="btn btn-success btn-radius">Comprado!</button>
+                    {{/comprado}}
+                    {{^comprado}}
+                        <button class="btn btn-danger btn-radius">Comprar</button>
+                    {{/comprado}}
+                    <a href="#" class="btn btn-primary btn-radius">Ver articulos</a>
+                </div>
+            </div>
+        {{/ediciones}}
+    </div>
+</section>
+{{> footer}}
+

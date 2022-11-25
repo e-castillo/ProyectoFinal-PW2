@@ -1,0 +1,85 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script !src="">
+    $(document).ready(function () {
+        {{#semana}}
+            console.log($('#{{day}}').text())
+            switch ($('#{{day}}').text()) {
+                case 'Sunday':
+                    $('#{{day}}').text('Domingo')
+                    break;
+                case 'Monday':
+                    $('#{{day}}').text('Lunes')
+                    break;
+                case 'Tuesday':
+                    $('#{{day}}').text('Martes')
+                    break;
+                case 'Wednesday':
+                    $('#{{day}}').text('Miercoles')
+                    break;
+                case 'Thursday':
+                    $('#{{day}}').text('Jueves')
+                    break;
+                case 'Friday':
+                    $('#{{day}}').text('Viernes')
+                    break;
+                case 'Saturday':
+                    $('#{{day}}').text('Sabado')
+                    break;
+                default:
+                    break;
+            }
+        {{/semana}}
+
+
+    })
+</script>
+{{> header}}
+<!-- The Band Section -->
+<section class="my-3">
+    <div class="card">
+        <div class="card-header">
+            Clima en {{clima.country}} - {{clima.city}}
+        </div>
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                {{#t}}
+                    <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="" srcset="">
+                {{/t}}
+                <span>{{tempNum}}° C</span>
+            </div>
+            <h5 class="my-3">En la semana</h5>
+            <div class="d-flex gap-5 flex-wrap">
+                {{#semana}}
+                    <div class="d-flex flex-column align-items-center">
+                        <p class="country" id="{{day}}">{{day}}</p>
+                        <img src="{{image}}" alt="{{image}}" width="50">
+                    </div>
+                {{/semana}}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="my-3">
+    <div class="home-product gap-2">
+        {{#productos}}
+            <div class="d-flex flex-column gap-2 border rounded p-3 home-card">
+                <p class="bg-info btn-radius px-2 fst-italic" style="width: fit-content">
+                    {{ descripcion }}
+                </p>
+                <img
+                        src="public/iso/{{ imagen }}"
+                        alt="{{ imagen }}"
+                        class="m-auto"
+                        width="100"
+                />
+                <h5 class="card-title text-center text-uppercase">{{ nombre }}</h5>
+                <a
+                        href="/infonet/producto/description/id={{ id_producto }}"
+                class="btn btn-warning align-self-center btn-radius"
+                >Ver producto</a
+                    >
+            </div>
+        {{/productos}}
+    </div>
+</section>
+{{> footer}}
